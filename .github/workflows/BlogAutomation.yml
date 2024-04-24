@@ -1,0 +1,23 @@
+name: Blog Automation
+
+on:
+    workflow_dispatch
+
+jobs:
+  scraper:
+    runs-on: ubuntu-latest
+
+    env: # Or as an environment variable
+      blog_username: ${{ secrets.blog_username }}
+      blog_password: ${{ secrets.blog_password }}
+      openai_key: ${{ secrets.openai_key }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Blog-Automation
+        run: |
+          sudo apt-get update
+          sudo apt install firefox
+          pip3 install -r requirements.txt
+          python in_class_blog.py
